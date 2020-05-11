@@ -25,10 +25,10 @@ import java.util.concurrent.Executor;
 import liquibase.resource.ResourceAccessor;
 
 /**
- * Implements java.sql.Connection in order to pretend a hibernate configuration is a database in order to fit into the Liquibase framework.
- * Beyond standard Connection methods, this class exposes {@link #getPrefix()}, {@link #getPath()} and {@link #getProperties()} to access the setting passed in the JDBC URL.
+ * Implements the java.sql.Connection interface to allow the Silk integration to work with Liquibase.
  */
 public class SilkConnection implements Connection {
+
     private String prefix;
     private String url;
 

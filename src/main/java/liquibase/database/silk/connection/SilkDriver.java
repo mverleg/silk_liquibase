@@ -3,53 +3,58 @@ package liquibase.database.silk.connection;
 import java.sql.Connection;
 import java.sql.Driver;
 import java.sql.DriverPropertyInfo;
-import java.sql.SQLException;
 import java.sql.SQLFeatureNotSupportedException;
 import java.util.Properties;
 import java.util.logging.Logger;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
+import org.apache.commons.lang3.tuple.Triple;
 
 import liquibase.database.LiquibaseExtDriver;
 import liquibase.resource.ResourceAccessor;
 
 /**
- * Implements the standard java.sql.Driver interface to allow the Hibernate integration to better fit into
- * what Liquibase expects.
+ * Implements the java.sql.Driver interface to allow the Silk integration to work with Liquibase.
  */
 public class SilkDriver implements Driver, LiquibaseExtDriver {
 
+    public static final Triple<Integer, Integer, Integer> VERSION = Triple.of(0, 1, 0);
+
     private ResourceAccessor resourceAccessor;
 
-    public Connection connect(String url, Properties info) throws SQLException {
+    public Connection connect(@Nonnull String url, @Nullable Properties info) {
         return new SilkConnection(url, resourceAccessor);
     }
 
-    public boolean acceptsURL(String url) throws SQLException {
-        return url.startsWith("hibernate:");
+    public boolean acceptsURL(@Nonnull String url) {
+        return url.startsWith("silk:");
     }
 
-    public DriverPropertyInfo[] getPropertyInfo(String url, Properties info) throws SQLException {
+    @Nonnull
+    public DriverPropertyInfo[] getPropertyInfo(String url, Properties info) {
         return new DriverPropertyInfo[0];
     }
 
     public int getMajorVersion() {
-        return 0;
+        return VERSION.getLeft();
     }
 
     public int getMinorVersion() {
-        return 0;
+        return VERSION.getMiddle();
     }
 
     public boolean jdbcCompliant() {
         return false;
     }
 
-    //@Override only override for java 1.7
     public Logger getParentLogger() throws SQLFeatureNotSupportedException {
         throw new SQLFeatureNotSupportedException();
     }
 
     @Override
-    public void setResourceAccessor(ResourceAccessor accessor) {
+    public void setResourceAccessor(@Nonnull ResourceAccessor accessor) {
         this.resourceAccessor = accessor;
     }
 }

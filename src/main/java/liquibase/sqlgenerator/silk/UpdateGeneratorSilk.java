@@ -1,17 +1,18 @@
 package liquibase.sqlgenerator.silk;
 
+import java.util.Date;
+
 import liquibase.database.Database;
 import liquibase.datatype.DataTypeFactory;
 import liquibase.exception.ValidationErrors;
 import liquibase.sql.Sql;
 import liquibase.sql.UnparsedSql;
 import liquibase.sqlgenerator.SqlGeneratorChain;
+import liquibase.sqlgenerator.core.AbstractSqlGenerator;
 import liquibase.statement.DatabaseFunction;
 import liquibase.statement.core.UpdateStatement;
 import liquibase.structure.core.Relation;
 import liquibase.structure.core.Table;
-
-import java.util.Date;
 
 import static liquibase.util.SqlUtil.replacePredicatePlaceholders;
 

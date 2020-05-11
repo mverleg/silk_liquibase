@@ -1,17 +1,23 @@
 package liquibase.sqlgenerator.silk;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import liquibase.database.Database;
-import liquibase.database.core.*;
+import liquibase.database.core.DB2Database;
+import liquibase.database.core.FirebirdDatabase;
+import liquibase.database.core.InformixDatabase;
+import liquibase.database.core.MySQLDatabase;
+import liquibase.database.core.SybaseASADatabase;
+import liquibase.database.core.SybaseDatabase;
 import liquibase.exception.ValidationErrors;
 import liquibase.sql.Sql;
 import liquibase.sql.UnparsedSql;
 import liquibase.sqlgenerator.SqlGeneratorChain;
+import liquibase.sqlgenerator.core.AbstractSqlGenerator;
 import liquibase.statement.core.DropColumnStatement;
 import liquibase.structure.core.Column;
 import liquibase.structure.core.Table;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class DropColumnGeneratorSilk extends AbstractSqlGenerator<DropColumnStatement> {
 

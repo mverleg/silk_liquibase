@@ -1,12 +1,24 @@
 package liquibase.sqlgenerator.silk;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import liquibase.change.ColumnConfig;
 import liquibase.database.Database;
-import liquibase.datatype.DatabaseDataType;
-import liquibase.statement.NotNullConstraint;
-import liquibase.statement.core.AddUniqueConstraintStatement;
-import liquibase.structure.core.Schema;
-import liquibase.database.core.*;
+import liquibase.database.core.AbstractDb2Database;
+import liquibase.database.core.DerbyDatabase;
+import liquibase.database.core.FirebirdDatabase;
+import liquibase.database.core.H2Database;
+import liquibase.database.core.HsqlDatabase;
+import liquibase.database.core.MSSQLDatabase;
+import liquibase.database.core.MySQLDatabase;
+import liquibase.database.core.OracleDatabase;
+import liquibase.database.core.SQLiteDatabase;
+import liquibase.database.core.SybaseASADatabase;
+import liquibase.database.core.SybaseDatabase;
 import liquibase.datatype.DataTypeFactory;
 import liquibase.datatype.DatabaseDataType;
 import liquibase.exception.UnexpectedLiquibaseException;
@@ -15,10 +27,12 @@ import liquibase.sql.Sql;
 import liquibase.sql.UnparsedSql;
 import liquibase.sqlgenerator.SqlGeneratorChain;
 import liquibase.sqlgenerator.SqlGeneratorFactory;
+import liquibase.sqlgenerator.core.AbstractSqlGenerator;
 import liquibase.statement.AutoIncrementConstraint;
 import liquibase.statement.ColumnConstraint;
 import liquibase.statement.DatabaseFunction;
 import liquibase.statement.ForeignKeyConstraint;
+import liquibase.statement.NotNullConstraint;
 import liquibase.statement.core.AddColumnStatement;
 import liquibase.statement.core.AddForeignKeyConstraintStatement;
 import liquibase.statement.core.AddUniqueConstraintStatement;
@@ -26,12 +40,6 @@ import liquibase.structure.core.Column;
 import liquibase.structure.core.Schema;
 import liquibase.structure.core.Table;
 import liquibase.util.StringUtil;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class AddColumnGeneratorSilk extends AbstractSqlGenerator<AddColumnStatement> {
 

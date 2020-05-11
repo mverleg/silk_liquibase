@@ -1,5 +1,10 @@
 package liquibase.sqlgenerator.silk;
 
+import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import liquibase.Scope;
 import liquibase.database.Database;
 import liquibase.database.core.AbstractDb2Database;
@@ -18,6 +23,7 @@ import liquibase.exception.ValidationErrors;
 import liquibase.sql.Sql;
 import liquibase.sql.UnparsedSql;
 import liquibase.sqlgenerator.SqlGeneratorChain;
+import liquibase.sqlgenerator.core.AbstractSqlGenerator;
 import liquibase.statement.AutoIncrementConstraint;
 import liquibase.statement.DatabaseFunction;
 import liquibase.statement.ForeignKeyConstraint;
@@ -30,11 +36,6 @@ import liquibase.structure.core.Schema;
 import liquibase.structure.core.Sequence;
 import liquibase.structure.core.Table;
 import liquibase.util.StringUtil;
-
-import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 
 public class CreateTableGeneratorSilk extends AbstractSqlGenerator<CreateTableStatement> {
 

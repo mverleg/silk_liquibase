@@ -8,6 +8,7 @@ import liquibase.exception.ValidationErrors;
 import liquibase.sql.Sql;
 import liquibase.sql.UnparsedSql;
 import liquibase.sqlgenerator.SqlGeneratorChain;
+import liquibase.sqlgenerator.core.AbstractSqlGenerator;
 import liquibase.statement.core.DropForeignKeyConstraintStatement;
 import liquibase.structure.core.ForeignKey;
 import liquibase.structure.core.Table;

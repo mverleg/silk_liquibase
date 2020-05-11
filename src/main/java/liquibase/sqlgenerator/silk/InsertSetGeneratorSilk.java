@@ -1,5 +1,8 @@
 package liquibase.sqlgenerator.silk;
 
+import java.util.ArrayList;
+import java.util.SortedSet;
+
 import liquibase.database.Database;
 import liquibase.exception.ValidationErrors;
 import liquibase.sql.Sql;
@@ -7,13 +10,11 @@ import liquibase.sql.UnparsedSql;
 import liquibase.sqlgenerator.SqlGenerator;
 import liquibase.sqlgenerator.SqlGeneratorChain;
 import liquibase.sqlgenerator.SqlGeneratorFactory;
+import liquibase.sqlgenerator.core.AbstractSqlGenerator;
 import liquibase.statement.core.InsertSetStatement;
 import liquibase.statement.core.InsertStatement;
 import liquibase.structure.core.Relation;
 import liquibase.structure.core.Table;
-
-import java.util.ArrayList;
-import java.util.SortedSet;
 
 public class InsertSetGeneratorSilk extends AbstractSqlGenerator<InsertSetStatement> {
 

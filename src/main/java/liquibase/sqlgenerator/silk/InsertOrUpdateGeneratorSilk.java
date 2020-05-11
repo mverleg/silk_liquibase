@@ -7,6 +7,7 @@ import liquibase.exception.LiquibaseException;
 import liquibase.sql.Sql;
 import liquibase.sql.UnparsedSql;
 import liquibase.sqlgenerator.SqlGeneratorChain;
+import liquibase.sqlgenerator.core.InsertOrUpdateGenerator;
 import liquibase.statement.core.InsertOrUpdateStatement;
 
 public class InsertOrUpdateGeneratorSilk extends InsertOrUpdateGenerator {

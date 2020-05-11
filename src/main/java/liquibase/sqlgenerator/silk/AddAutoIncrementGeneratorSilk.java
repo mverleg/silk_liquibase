@@ -1,12 +1,18 @@
 package liquibase.sqlgenerator.silk;
 
 import liquibase.database.Database;
-import liquibase.database.core.*;
+import liquibase.database.core.DerbyDatabase;
+import liquibase.database.core.H2Database;
+import liquibase.database.core.HsqlDatabase;
+import liquibase.database.core.MSSQLDatabase;
+import liquibase.database.core.OracleDatabase;
+import liquibase.database.core.SybaseASADatabase;
 import liquibase.datatype.DataTypeFactory;
 import liquibase.exception.ValidationErrors;
 import liquibase.sql.Sql;
 import liquibase.sql.UnparsedSql;
 import liquibase.sqlgenerator.SqlGeneratorChain;
+import liquibase.sqlgenerator.core.AbstractSqlGenerator;
 import liquibase.statement.core.AddAutoIncrementStatement;
 import liquibase.structure.core.Column;
 import liquibase.structure.core.Schema;

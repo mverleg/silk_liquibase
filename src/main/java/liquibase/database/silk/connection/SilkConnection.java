@@ -22,6 +22,10 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.Executor;
 
+import javax.annotation.Nonnull;
+
+import org.apache.commons.lang3.NotImplementedException;
+
 import liquibase.resource.ResourceAccessor;
 
 /**
@@ -36,7 +40,7 @@ public class SilkConnection implements Connection {
     private ResourceAccessor resourceAccessor;
     private Properties properties;
 
-    public SilkConnection(String url, ResourceAccessor resourceAccessor) {
+    public SilkConnection(@Nonnull String url, ResourceAccessor resourceAccessor) {
         this.url = url;
 
         this.prefix = url.replaceFirst(":[^:]+$", "");
@@ -81,6 +85,7 @@ public class SilkConnection implements Connection {
     /**
      * Returns the entire connection URL
      */
+    @Nonnull
     public String getUrl() {
         return url;
     }
@@ -89,6 +94,7 @@ public class SilkConnection implements Connection {
     /**
      * Returns the 'protocol' of the URL. For example, "hibernate:classic" or "hibernate:ejb3"
      */
+    @Nonnull
     public String getPrefix() {
         return prefix;
     }
@@ -96,6 +102,7 @@ public class SilkConnection implements Connection {
     /**
      * The portion of the url between the path and the query string. Normally a filename or a class name.
      */
+    @Nonnull
     public String getPath() {
         return path;
     }
@@ -103,10 +110,11 @@ public class SilkConnection implements Connection {
     /**
      * The set of properties provided by the URL. Eg:
      * <p/>
-     * <code>hibernate:classic:/path/to/hibernate.cfg.xml?foo=bar</code>
+     * <code>silkd:/path/to/schema.silk.json?foo=bar</code>
      * <p/>
      * This will have a property called 'foo' with a value of 'bar'.
      */
+    @Nonnull
     public Properties getProperties() {
         return properties;
     }
@@ -116,167 +124,170 @@ public class SilkConnection implements Connection {
     /// JDBC METHODS
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public Statement createStatement() throws SQLException {
+    public Statement createStatement() {
         return null;
     }
 
-    public PreparedStatement prepareStatement(String sql) throws SQLException {
+    public PreparedStatement prepareStatement(String sql) {
         return null;
     }
 
-    public CallableStatement prepareCall(String sql) throws SQLException {
+    public CallableStatement prepareCall(String sql) {
         return null;
     }
 
-    public String nativeSQL(String sql) throws SQLException {
-        return null;
+    public String nativeSQL(String sql) {
+        throw new NotImplementedException("native sql not supported yet");
     }
 
-    public void setAutoCommit(boolean autoCommit) throws SQLException {
-
+    public void setAutoCommit(boolean autoCommit) {
+        if (autoCommit) {
+            throw new NotImplementedException("auto commit mode not supported");
+        }
     }
 
-    public boolean getAutoCommit() throws SQLException {
+    public boolean getAutoCommit() {
         return false;
     }
 
-    public void commit() throws SQLException {
+    public void commit() {
 
     }
 
-    public void rollback() throws SQLException {
+    public void rollback() {
 
     }
 
-    public void close() throws SQLException {
-
+    public void close() {
+        //TODO @mark: only do this if changed
+        commit();
     }
 
-    public boolean isClosed() throws SQLException {
+    public boolean isClosed() {
         return false;
     }
 
-    public DatabaseMetaData getMetaData() throws SQLException {
+    public DatabaseMetaData getMetaData() {
         return new SilkConnectionMetadata(url);
     }
 
-    public void setReadOnly(boolean readOnly) throws SQLException {
+    public void setReadOnly(boolean readOnly) {
 
     }
 
-    public boolean isReadOnly() throws SQLException {
+    public boolean isReadOnly() {
         return true;
     }
 
-    public void setCatalog(String catalog) throws SQLException {
+    public void setCatalog(String catalog) {
 
     }
 
-    public String getCatalog() throws SQLException {
+    public String getCatalog() {
         return "HIBERNATE";
     }
 
-    public void setTransactionIsolation(int level) throws SQLException {
+    public void setTransactionIsolation(int level) {
 
     }
 
-    public int getTransactionIsolation() throws SQLException {
+    public int getTransactionIsolation() {
         return 0;
     }
 
-    public SQLWarning getWarnings() throws SQLException {
+    public SQLWarning getWarnings() {
         return null;
     }
 
-    public void clearWarnings() throws SQLException {
+    public void clearWarnings() {
 
     }
 
-    public Statement createStatement(int resultSetType, int resultSetConcurrency) throws SQLException {
+    public Statement createStatement(int resultSetType, int resultSetConcurrency) {
         return null;
     }
 
-    public PreparedStatement prepareStatement(String sql, int resultSetType, int resultSetConcurrency) throws SQLException {
+    public PreparedStatement prepareStatement(String sql, int resultSetType, int resultSetConcurrency) {
         return null;
     }
 
-    public CallableStatement prepareCall(String sql, int resultSetType, int resultSetConcurrency) throws SQLException {
+    public CallableStatement prepareCall(String sql, int resultSetType, int resultSetConcurrency) {
         return null;
     }
 
-    public Map<String, Class<?>> getTypeMap() throws SQLException {
+    public Map<String, Class<?>> getTypeMap() {
         return null;
     }
 
-    public void setTypeMap(Map<String, Class<?>> map) throws SQLException {
+    public void setTypeMap(Map<String, Class<?>> map) {
 
     }
 
-    public void setHoldability(int holdability) throws SQLException {
+    public void setHoldability(int holdability) {
 
     }
 
-    public int getHoldability() throws SQLException {
+    public int getHoldability() {
         return 0;
     }
 
-    public Savepoint setSavepoint() throws SQLException {
+    public Savepoint setSavepoint() {
         return null;
     }
 
-    public Savepoint setSavepoint(String name) throws SQLException {
+    public Savepoint setSavepoint(String name) {
         return null;
     }
 
-    public void rollback(Savepoint savepoint) throws SQLException {
+    public void rollback(Savepoint savepoint) {
 
     }
 
-    public void releaseSavepoint(Savepoint savepoint) throws SQLException {
+    public void releaseSavepoint(Savepoint savepoint) {
 
     }
 
-    public Statement createStatement(int resultSetType, int resultSetConcurrency, int resultSetHoldability) throws SQLException {
+    public Statement createStatement(int resultSetType, int resultSetConcurrency, int resultSetHoldability) {
         return null;
     }
 
-    public PreparedStatement prepareStatement(String sql, int resultSetType, int resultSetConcurrency, int resultSetHoldability) throws SQLException {
+    public PreparedStatement prepareStatement(String sql, int resultSetType, int resultSetConcurrency, int resultSetHoldability) {
         return null;
     }
 
-    public CallableStatement prepareCall(String sql, int resultSetType, int resultSetConcurrency, int resultSetHoldability) throws SQLException {
+    public CallableStatement prepareCall(String sql, int resultSetType, int resultSetConcurrency, int resultSetHoldability) {
         return null;
     }
 
-    public PreparedStatement prepareStatement(String sql, int autoGeneratedKeys) throws SQLException {
+    public PreparedStatement prepareStatement(String sql, int autoGeneratedKeys) {
         return null;
     }
 
-    public PreparedStatement prepareStatement(String sql, int[] columnIndexes) throws SQLException {
+    public PreparedStatement prepareStatement(String sql, int[] columnIndexes) {
         return null;
     }
 
-    public PreparedStatement prepareStatement(String sql, String[] columnNames) throws SQLException {
+    public PreparedStatement prepareStatement(String sql, String[] columnNames) {
         return null;
     }
 
-    public Clob createClob() throws SQLException {
+    public Clob createClob() {
         return null;
     }
 
-    public Blob createBlob() throws SQLException {
+    public Blob createBlob() {
         return null;
     }
 
-    public NClob createNClob() throws SQLException {
+    public NClob createNClob() {
         return null;
     }
 
-    public SQLXML createSQLXML() throws SQLException {
+    public SQLXML createSQLXML() {
         return null;
     }
 
-    public boolean isValid(int timeout) throws SQLException {
+    public boolean isValid(int timeout) {
         return false;
     }
 
@@ -288,50 +299,50 @@ public class SilkConnection implements Connection {
 
     }
 
-    public String getClientInfo(String name) throws SQLException {
+    public String getClientInfo(String name) {
         return null;
     }
 
-    public Properties getClientInfo() throws SQLException {
+    public Properties getClientInfo() {
         return null;
     }
 
-    public Array createArrayOf(String typeName, Object[] elements) throws SQLException {
+    public Array createArrayOf(String typeName, Object[] elements) {
         return null;
     }
 
-    public Struct createStruct(String typeName, Object[] attributes) throws SQLException {
+    public Struct createStruct(String typeName, Object[] attributes) {
         return null;
     }
 
-    public <T> T unwrap(Class<T> iface) throws SQLException {
+    public <T> T unwrap(Class<T> iface) {
         return null;
     }
 
-    public boolean isWrapperFor(Class<?> iface) throws SQLException {
+    public boolean isWrapperFor(Class<?> iface) {
         return false;
     }
 
     //@Override only in java 1.7
-    public void abort(Executor arg0) throws SQLException {
+    public void abort(Executor arg0) {
     }
 
     //@Override only in java 1.7
-    public int getNetworkTimeout() throws SQLException {
+    public int getNetworkTimeout() {
         return 0;
     }
 
     //@Override only in java 1.7
-    public String getSchema() throws SQLException {
+    public String getSchema() {
         return "HIBERNATE";
     }
 
     //@Override only in java 1.7
-    public void setNetworkTimeout(Executor arg0, int arg1) throws SQLException {
+    public void setNetworkTimeout(Executor arg0, int arg1) {
     }
 
     //@Override only in java 1.7
-    public void setSchema(String arg0) throws SQLException {
+    public void setSchema(String arg0) {
     }
 
     public ResourceAccessor getResourceAccessor() {

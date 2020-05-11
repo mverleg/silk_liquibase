@@ -19,11 +19,10 @@ import liquibase.database.core.SybaseASADatabase;
 import liquibase.database.core.SybaseDatabase;
 import liquibase.datatype.DatabaseDataType;
 import liquibase.exception.DatabaseException;
-import liquibase.exception.ValidationErrors;
 import liquibase.sql.Sql;
 import liquibase.sql.UnparsedSql;
 import liquibase.sqlgenerator.SqlGeneratorChain;
-import liquibase.sqlgenerator.core.AbstractSqlGenerator;
+import liquibase.sqlgenerator.core.CreateTableGenerator;
 import liquibase.statement.AutoIncrementConstraint;
 import liquibase.statement.DatabaseFunction;
 import liquibase.statement.ForeignKeyConstraint;
@@ -35,17 +34,8 @@ import liquibase.structure.core.Relation;
 import liquibase.structure.core.Schema;
 import liquibase.structure.core.Sequence;
 import liquibase.structure.core.Table;
-import liquibase.util.StringUtil;
 
-public class CreateTableGeneratorSilk extends AbstractSqlGenerator<CreateTableStatement> {
-
-    @Override
-    public ValidationErrors validate(CreateTableStatement createTableStatement, Database database, SqlGeneratorChain sqlGeneratorChain) {
-        ValidationErrors validationErrors = new ValidationErrors();
-        validationErrors.checkRequiredField("tableName", createTableStatement.getTableName());
-        validationErrors.checkRequiredField("columns", createTableStatement.getColumns());
-        return validationErrors;
-    }
+public class CreateTableGeneratorSilk extends CreateTableGenerator {
 
     @Override
     public Sql[] generateSql(CreateTableStatement statement, Database database, SqlGeneratorChain sqlGeneratorChain) {

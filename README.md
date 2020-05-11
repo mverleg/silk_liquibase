@@ -9,3 +9,12 @@ Status
 -------------------------------
 
 This project is not ready for use.
+
+
+
+Sources
+-------------------------------
+
+* https://liquibase.jira.com/wiki/spaces/CONTRIB/pages/2424845/Database
+* https://liquibase.jira.com/wiki/spaces/CONTRIB/pages/1998878/SqlGenerator
+* https://github.com/liquibase/liquibase-hibernate

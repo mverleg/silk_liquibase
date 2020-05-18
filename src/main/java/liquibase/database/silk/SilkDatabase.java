@@ -4,14 +4,11 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.List;
 
-import org.apache.commons.lang3.NotImplementedException;
-
 import liquibase.change.Change;
 import liquibase.database.AbstractJdbcDatabase;
 import liquibase.database.DatabaseConnection;
 import liquibase.database.silk.connection.SilkDriver;
 import liquibase.database.silk.sql.SilkSql;
-import liquibase.exception.DatabaseException;
 import liquibase.sql.Sql;
 import liquibase.sql.visitor.SqlVisitor;
 import liquibase.sqlgenerator.SqlGeneratorFactory;

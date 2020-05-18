@@ -3,6 +3,7 @@ package liquibase.database.silk.connection;
 import java.io.IOException;
 import java.io.StringReader;
 import java.net.URLDecoder;
+import java.nio.file.Paths;
 import java.sql.Array;
 import java.sql.Blob;
 import java.sql.CallableStatement;
@@ -27,11 +28,16 @@ import javax.annotation.Nonnull;
 import org.apache.commons.lang3.NotImplementedException;
 
 import liquibase.resource.ResourceAccessor;
+import nl.markv.silk.SilkLoader;
+import nl.markv.silk.io.SilkSchemaLockedFile;
 
 /**
  * Implements the java.sql.Connection interface to allow the Silk integration to work with Liquibase.
  */
 public class SilkConnection implements Connection {
+
+    @Nonnull
+    private SilkSchemaLockedFile schema;
 
     private String prefix;
     private String url;
@@ -40,6 +46,9 @@ public class SilkConnection implements Connection {
     private ResourceAccessor resourceAccessor;
     private Properties properties;
 
+    /**
+     * @param url Something like <code>silk:/path/to/schema.silk.json?foo=bar</code>
+     */
     public SilkConnection(@Nonnull String url, ResourceAccessor resourceAccessor) {
         this.url = url;
 
@@ -57,13 +66,15 @@ public class SilkConnection implements Connection {
             // Convert the query string into properties
             properties.putAll(readProperties(path.substring(queryIndex + 1)));
 
-            if (properties.containsKey("dialect") && !properties.containsKey("hibernate.dialect")) {
-                properties.put("hibernate.dialect", properties.getProperty("dialect"));
-            }
-
             // Remove the query string
             path = path.substring(0, queryIndex);
         }
+
+        loadSchema();
+    }
+
+    private void loadSchema() {
+        schema = SilkLoader.lockAndLoad(Paths.get(path));
     }
 
     /**
@@ -110,7 +121,7 @@ public class SilkConnection implements Connection {
     /**
      * The set of properties provided by the URL. Eg:
      * <p/>
-     * <code>silkd:/path/to/schema.silk.json?foo=bar</code>
+     * <code>silk:/path/to/schema.silk.json?foo=bar</code>
      * <p/>
      * This will have a property called 'foo' with a value of 'bar'.
      */
@@ -151,16 +162,17 @@ public class SilkConnection implements Connection {
     }
 
     public void commit() {
-
+        schema.saveWithoutUnlock();
     }
 
     public void rollback() {
-
+        schema.unlock();
+        loadSchema();
     }
 
     public void close() {
-        //TODO @mark: only do this if changed
-        commit();
+        //TODO @mark: only do this if changed since commit?
+        schema.saveAndUnlock();
     }
 
     public boolean isClosed() {

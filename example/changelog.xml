@@ -1,0 +1,290 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+    <changeSet author="mark (generated)" id="1592771908137-1">
+        <createTable tableName="bottom">
+            <column name="id" type="INTEGER">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="id1" type="INTEGER"/>
+            <column name="id2" type="INTEGER"/>
+            <column name="id3" type="INTEGER"/>
+            <column defaultValue="insert info" name="select" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="drop table" name="case" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="--" name="from" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="mark (generated)" id="1592771908137-2">
+        <createTable tableName="cart">
+            <column name="id" type="INTEGER">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="customer_logon" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="product_selection_id" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="current_timestamp" name="created_at" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="current_timestamp" name="updated_at" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="mark (generated)" id="1592771908137-3">
+        <createTable tableName="category">
+            <column name="id" type="INTEGER">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="slug" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="current_timestamp" name="created_at" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="current_timestamp" name="updated_at" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="mark (generated)" id="1592771908137-4">
+        <createTable tableName="customer">
+            <column name="logon" type="TEXT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name" type="TEXT"/>
+            <column name="address" type="TEXT"/>
+            <column defaultValue="current_timestamp" name="created_at" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="current_timestamp" name="updated_at" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="mark (generated)" id="1592771908137-5">
+        <createTable tableName="left">
+            <column name="id" type="INTEGER">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="text" type="TEXT"/>
+            <column name="text_lim" type="TEXT"/>
+            <column name="int" type="INTEGER"/>
+            <column name="uint" type="INTEGER"/>
+            <column name="decimal1" type="FLOAT(2000000000, 10)"/>
+            <column name="decimal2" type="FLOAT(2000000000, 10)"/>
+            <column name="timestamp" type="TEXT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mark (generated)" id="1592771908137-6">
+        <createTable tableName="order">
+            <column name="id" type="INTEGER">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="customer_logon" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="product_selection_id" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="paid_at" type="TEXT"/>
+            <column name="sent_at" type="TEXT"/>
+            <column defaultValue="current_timestamp" name="created_at" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="current_timestamp" name="updated_at" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="mark (generated)" id="1592771908137-7">
+        <createTable tableName="product">
+            <column name="id" type="INTEGER">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="category_id" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="TEXT"/>
+            <column name="buy_price" type="FLOAT(2000000000, 10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sell_price" type="FLOAT(2000000000, 10)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="current_timestamp" name="created_at" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="current_timestamp" name="updated_at" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="mark (generated)" id="1592771908137-8">
+        <createTable tableName="product_quantity">
+            <column name="id" type="INTEGER">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="product_id" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="selection_id" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="count" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="current_timestamp" name="created_at" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="current_timestamp" name="updated_at" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="mark (generated)" id="1592771908137-9">
+        <createTable tableName="product_selection">
+            <column name="id" type="INTEGER">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column defaultValue="current_timestamp" name="created_at" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="current_timestamp" name="updated_at" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="mark (generated)" id="1592771908137-10">
+        <createTable tableName="right">
+            <column name="id1" type="INTEGER">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="id2" type="INTEGER">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="id3" type="INTEGER">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column defaultValue="abc" name="text" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="abcdefghijkl" name="text_lim" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="-123456" name="int" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="1" name="uint" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="1234.5679" name="decimal1" type="FLOAT(2000000000, 10)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="-1234.5679" name="decimal2" type="FLOAT(2000000000, 10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="timestamp_a" type="TEXT"/>
+            <column defaultValue="2020-05-10 18:00:00.000" name="timestamp_b" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="current_timestamp" name="timestamp_c" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="current_timestamp" name="timestamp_d" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="mark (generated)" id="1592771908137-11">
+        <createTable tableName="top">
+            <column name="id" type="INTEGER">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="mark (generated)" id="1592771908137-12">
+        <createTable tableName="very_long_table_name_db_limits">
+            <column name="id" type="INTEGER">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="very_long_column_name_db_limit" type="TEXT"/>
+            <column name="nrs_0123456789_" type="INTEGER"/>
+            <column name="THIS_SHOULD_BE_UPPERCASE" type="INTEGER"/>
+            <column name="this_lowercase" type="INTEGER"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mark (generated)" id="1592771908137-13">
+        <createIndex indexName="i_category_slug" tableName="category" unique="true">
+            <column name="slug"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="mark (generated)" id="1592771908137-14">
+        <createIndex indexName="i_product_category_id_name" tableName="product" unique="true">
+            <column name="category_id"/>
+            <column name="name"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="mark (generated)" id="1592771908137-15">
+        <createIndex indexName="i_product_quantity_product_id" tableName="product_quantity" unique="true">
+            <column name="product_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="mark (generated)" id="1592771908137-16">
+        <createIndex indexName="i_right_id1_id2_id3" tableName="bottom">
+            <column name="id1"/>
+            <column name="id2"/>
+            <column name="id3"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="mark (generated)" id="1592771908137-17">
+        <createIndex indexName="i_right_int_decimal1_timestamp_a_timestamp_b" tableName="right" unique="true">
+            <column defaultValueNumeric="-123456" name="int"/>
+            <column defaultValueNumeric="1234.5679" name="decimal1"/>
+            <column name="timestamp_a"/>
+            <column name="timestamp_b"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="mark (generated)" id="1592771908137-18">
+        <createIndex indexName="sqlite_autoindex_category_1" tableName="category" unique="true">
+            <column name="name"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="mark (generated)" id="1592771908137-19">
+        <createIndex indexName="sqlite_autoindex_left_1" tableName="left" unique="true">
+            <column name="int"/>
+            <column name="decimal1"/>
+            <column name="timestamp"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="mark (generated)" id="1592771908137-20">
+        <createIndex indexName="sqlite_autoindex_left_2" tableName="left" unique="true">
+            <column name="int"/>
+            <column name="decimal1"/>
+            <column name="text"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="mark (generated)" id="1592771908137-21">
+        <createIndex indexName="sqlite_autoindex_right_3" tableName="right" unique="true">
+            <column defaultValueNumeric="-123456" name="int"/>
+            <column defaultValueNumeric="1234.5679" name="decimal1"/>
+            <column name="text_lim"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="mark (generated)" id="1592771908137-22">
+        <addForeignKeyConstraint baseColumnNames="customer_logon,product_selection_id" baseTableName="order" constraintName="" deferrable="true" initiallyDeferred="true" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="logon,id" referencedTableName="product_selection" validate="true"/>
+    </changeSet>
+</databaseChangeLog>

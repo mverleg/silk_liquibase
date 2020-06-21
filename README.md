@@ -12,6 +12,14 @@ This project is not ready for use.
 
 
 
+How to use
+-------------------------------
+
+* You need https://github.com/liquibase/liquibase
+* Can only be build on Java EE, not on Java SE
+* ???
+
+
 Sources
 -------------------------------
 

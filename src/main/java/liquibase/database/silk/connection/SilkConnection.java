@@ -196,7 +196,7 @@ public class SilkConnection implements Connection {
     }
 
     public String getCatalog() {
-        return "HIBERNATE";
+        return "SILK";
     }
 
     public void setTransactionIsolation(int level) {
@@ -346,7 +346,7 @@ public class SilkConnection implements Connection {
 
     //@Override only in java 1.7
     public String getSchema() {
-        return "HIBERNATE";
+        return "SILK";
     }
 
     //@Override only in java 1.7

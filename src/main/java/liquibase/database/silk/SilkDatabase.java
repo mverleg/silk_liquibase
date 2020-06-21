@@ -22,7 +22,7 @@ public class SilkDatabase extends AbstractJdbcDatabase {
 
     @Override
     public int getPriority() {
-        return PRIORITY_DEFAULT;
+        return PRIORITY_DATABASE;
     }
 
     @Override

@@ -39,7 +39,7 @@ import liquibase.statement.core.AddUniqueConstraintStatement;
 import liquibase.structure.core.Column;
 import liquibase.structure.core.Schema;
 import liquibase.structure.core.Table;
-import liquibase.util.StringUtil;
+import liquibase.util.StringUtils;
 
 public class AddColumnGeneratorSilk extends AbstractSqlGenerator<AddColumnStatement> {
 
@@ -162,7 +162,7 @@ public class AddColumnGeneratorSilk extends AbstractSqlGenerator<AddColumnStatem
             for (ColumnConstraint constraint : statement.getConstraints()) {
                 if (constraint instanceof NotNullConstraint) {
                     NotNullConstraint notNullConstraint = (NotNullConstraint) constraint;
-                    if (StringUtil.isNotEmpty(notNullConstraint.getConstraintName())) {
+                    if (StringUtils.isNotEmpty(notNullConstraint.getConstraintName())) {
                         alterTable += " CONSTRAINT " + database.escapeConstraintName(notNullConstraint.getConstraintName());
                         break;
                     }
@@ -188,7 +188,7 @@ public class AddColumnGeneratorSilk extends AbstractSqlGenerator<AddColumnStatem
         }
 
         if ((database instanceof MySQLDatabase) && (statement.getRemarks() != null)) {
-            alterTable += " COMMENT '" + database.escapeStringForDatabase(StringUtil.trimToEmpty(statement.getRemarks())) + "' ";
+            alterTable += " COMMENT '" + database.escapeStringForDatabase(StringUtils.trimToEmpty(statement.getRemarks())) + "' ";
         }
 
         if ((statement.getAddAfterColumn() != null) && !statement.getAddAfterColumn().isEmpty()) {

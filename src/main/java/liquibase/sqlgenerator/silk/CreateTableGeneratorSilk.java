@@ -34,6 +34,7 @@ import liquibase.structure.core.Relation;
 import liquibase.structure.core.Schema;
 import liquibase.structure.core.Sequence;
 import liquibase.structure.core.Table;
+import liquibase.util.StringUtils;
 
 public class CreateTableGeneratorSilk extends CreateTableGenerator {
 
@@ -82,7 +83,7 @@ public class CreateTableGeneratorSilk extends CreateTableGenerator {
                     isSinglePrimaryKeyColumn &&
                     isPrimaryKeyColumn &&
                     isAutoIncrementColumn) {
-                String pkName = StringUtil.trimToNull(statement.getPrimaryKeyConstraint().getConstraintName());
+                String pkName = StringUtils.trimToNull(statement.getPrimaryKeyConstraint().getConstraintName());
                 if (pkName == null) {
                     pkName = database.generatePrimaryKeyName(statement.getTableName());
                 }
@@ -170,7 +171,7 @@ public class CreateTableGeneratorSilk extends CreateTableGenerator {
                 } else {
                     /* Determine if the NOT NULL constraint has a name. */
                     NotNullConstraint nnConstraintForThisColumn = statement.getNotNullColumns().get(column);
-                    String nncName = StringUtil.trimToNull(nnConstraintForThisColumn.getConstraintName());
+                    String nncName = StringUtils.trimToNull(nnConstraintForThisColumn.getConstraintName());
                     if (nncName == null) {
                         buffer.append(" NOT NULL");
                     } else {
@@ -211,7 +212,7 @@ public class CreateTableGeneratorSilk extends CreateTableGenerator {
             if ((statement.getPrimaryKeyConstraint() != null) && !statement.getPrimaryKeyConstraint().getColumns()
                 .isEmpty()) {
                 if (database.supportsPrimaryKeyNames()) {
-                    String pkName = StringUtil.trimToNull(statement.getPrimaryKeyConstraint().getConstraintName());
+                    String pkName = StringUtils.trimToNull(statement.getPrimaryKeyConstraint().getConstraintName());
                     if (pkName == null) {
                         // TODO ORA-00972: identifier is too long
                         // If tableName lenght is more then 28 symbols
@@ -224,7 +225,7 @@ public class CreateTableGeneratorSilk extends CreateTableGenerator {
                     }
                 }
                 buffer.append(" PRIMARY KEY (");
-                buffer.append(database.escapeColumnNameList(StringUtil.join(statement.getPrimaryKeyConstraint().getColumns(), ", ")));
+                buffer.append(database.escapeColumnNameList(StringUtils.join(statement.getPrimaryKeyConstraint().getColumns(), ", ")));
                 buffer.append(")");
                 // Setting up table space for PK's index if it exist
                 if (((database instanceof OracleDatabase) || (database instanceof PostgresDatabase)) && (statement
@@ -291,7 +292,7 @@ public class CreateTableGeneratorSilk extends CreateTableGenerator {
                 buffer.append(database.escapeConstraintName(uniqueConstraint.getConstraintName()));
             }
             buffer.append(" UNIQUE (");
-            buffer.append(database.escapeColumnNameList(StringUtil.join(uniqueConstraint.getColumns(), ", ")));
+            buffer.append(database.escapeColumnNameList(StringUtils.join(uniqueConstraint.getColumns(), ", ")));
             buffer.append(")");
             if (database instanceof OracleDatabase) {
                 buffer.append(!uniqueConstraint.shouldValidateUnique() ? " ENABLE NOVALIDATE " : "");

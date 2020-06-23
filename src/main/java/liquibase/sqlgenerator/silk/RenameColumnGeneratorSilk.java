@@ -21,7 +21,7 @@ import liquibase.sqlgenerator.core.AbstractSqlGenerator;
 import liquibase.statement.core.RenameColumnStatement;
 import liquibase.structure.core.Column;
 import liquibase.structure.core.Table;
-import liquibase.util.StringUtil;
+import liquibase.util.StringUtils;
 
 public class RenameColumnGeneratorSilk extends AbstractSqlGenerator<RenameColumnStatement> {
 
@@ -38,7 +38,7 @@ public class RenameColumnGeneratorSilk extends AbstractSqlGenerator<RenameColumn
         validationErrors.checkRequiredField("newColumnName", renameColumnStatement.getNewColumnName());
 
         if (database instanceof MySQLDatabase) {
-            validationErrors.checkRequiredField("columnDataType", StringUtil.trimToNull(renameColumnStatement.getColumnDataType()));
+            validationErrors.checkRequiredField("columnDataType", StringUtils.trimToNull(renameColumnStatement.getColumnDataType()));
         }
 
         return validationErrors;

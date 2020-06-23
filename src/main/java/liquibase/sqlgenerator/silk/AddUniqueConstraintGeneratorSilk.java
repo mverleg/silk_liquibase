@@ -19,7 +19,7 @@ import liquibase.structure.core.Column;
 import liquibase.structure.core.Index;
 import liquibase.structure.core.Table;
 import liquibase.structure.core.UniqueConstraint;
-import liquibase.util.StringUtil;
+import liquibase.util.StringUtils;
 
 public class AddUniqueConstraintGeneratorSilk extends AbstractSqlGenerator<AddUniqueConstraintStatement> {
 
@@ -86,7 +86,7 @@ public class AddUniqueConstraintGeneratorSilk extends AbstractSqlGenerator<AddUn
             isInUsingIndexClause = true;
         }
 
-        if ((StringUtil.trimToNull(statement.getTablespace()) != null) && database.supportsTablespaces()) {
+        if ((StringUtils.trimToNull(statement.getTablespace()) != null) && database.supportsTablespaces()) {
             if (database instanceof MSSQLDatabase) {
                 sql += " ON " + statement.getTablespace();
             } else if ((database instanceof AbstractDb2Database) || (database instanceof SybaseASADatabase) || (database

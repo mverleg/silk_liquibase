@@ -16,7 +16,7 @@ import liquibase.sqlgenerator.core.AbstractSqlGenerator;
 import liquibase.statement.core.SetColumnRemarksStatement;
 import liquibase.structure.core.Column;
 import liquibase.structure.core.Table;
-import liquibase.util.StringUtil;
+import liquibase.util.StringUtils;
 
 public class SetColumnRemarksGeneratorSilk extends AbstractSqlGenerator<SetColumnRemarksStatement> {
     @Override
@@ -43,7 +43,7 @@ public class SetColumnRemarksGeneratorSilk extends AbstractSqlGenerator<SetColum
     @Override
     public Sql[] generateSql(SetColumnRemarksStatement statement, Database database, SqlGeneratorChain sqlGeneratorChain) {
 
-        String remarksEscaped = database.escapeStringForDatabase(StringUtil.trimToEmpty(statement.getRemarks()));
+        String remarksEscaped = database.escapeStringForDatabase(StringUtils.trimToEmpty(statement.getRemarks()));
 
         if (database instanceof MySQLDatabase) {
             return new Sql[]{new UnparsedSql("ALTER TABLE " + database.escapeTableName(statement.getCatalogName(), statement.getSchemaName(), statement.getTableName()) + " COMMENT = '" + remarksEscaped
